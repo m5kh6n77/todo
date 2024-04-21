@@ -1,25 +1,51 @@
-import logo from './logo.svg';
-import './App.css';
+import { Box, Container, Stack, Grid } from "@mui/material";
+import Item from "./components/Item";
+import Header from "./components/Header";
+import AddTodo from "./components/AddTodo";
+import { useSelector } from "react-redux";
+import { useState } from "react";
 
-function App() {
+export default function App() {
+  const [todoName, setTodoName] = useState("");
+  const todoList = useSelector((state) => state.todos.value);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    <>
+      <Container maxWidth="md" fixed style={{ color: "#0D0D0D" }}>
+        <Box sx={{ bgcolor: "#ffffff", height: "100vh" }}>
+          <Stack
+            spacing={2}
+            justifyContent="center"
+            alignItems="center"
+            padding="40px"
+          >
+            <Header />
 
-export default App;
+            <AddTodo
+              handleChangeState={changeTodoNameState}
+              newTodo={todoName}
+            />
+
+            <Grid container spacing={2} direction="column">
+              {todoList.map((todo) => {
+                return (
+                  <Grid item xs key={todo.id}>
+                    <Item
+                      id={todo.id}
+                      name={todo.name}
+                      isChecked={todo.isChecked}
+                    />
+                  </Grid>
+                );
+              })}
+            </Grid>
+          </Stack>
+        </Box>
+      </Container>
+    </>
+  );
+
+  function changeTodoNameState(newTodoName) {
+    setTodoName(newTodoName);
+  }
+}
