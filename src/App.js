@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 import { useState } from "react";
 
 export default function App() {
-  const [todoName, setTodoName] = useState("");
   const todoList = useSelector((state) => state.todos.value);
 
   return (
@@ -21,10 +20,7 @@ export default function App() {
           >
             <Header />
 
-            <AddTodo
-              handleChangeState={changeTodoNameState}
-              newTodo={todoName}
-            />
+            <AddTodo />
 
             <Grid container spacing={2} direction="column">
               {todoList.map((todo) => {
@@ -44,8 +40,4 @@ export default function App() {
       </Container>
     </>
   );
-
-  function changeTodoNameState(newTodoName) {
-    setTodoName(newTodoName);
-  }
 }
