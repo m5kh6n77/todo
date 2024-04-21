@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { deleteTodo, updateChecked } from "../Data/TodoSlice";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
-import { red } from "@mui/material/colors";
+
 const Item = ({ id, name, isChecked }) => {
   const dispatch = useDispatch();
   return (

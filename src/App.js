@@ -3,7 +3,6 @@ import Item from "./components/Item";
 import Header from "./components/Header";
 import AddTodo from "./components/AddTodo";
 import { useSelector } from "react-redux";
-import { useState } from "react";
 
 export default function App() {
   const todoList = useSelector((state) => state.todos.value);
